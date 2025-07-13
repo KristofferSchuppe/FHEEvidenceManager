@@ -1,0 +1,10 @@
+node_modules
+artifacts
+cache
+coverage
+deployments
+simulations
+*.env
+.env.*
+package-lock.json
+gas-report.txt
