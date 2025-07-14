@@ -1,0 +1,80 @@
+{
+  "name": "privacy-evidence-manager",
+  "version": "1.0.0",
+  "description": "Decentralized Privacy-Preserving Evidence Management System with FHE",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:coverage": "hardhat coverage",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "deploy": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "verify": "hardhat run scripts/verify.js --network sepolia",
+    "interact": "hardhat run scripts/interact.js --network sepolia",
+    "simulate": "hardhat run scripts/simulate.js --network sepolia",
+    "node": "hardhat node",
+    "clean": "hardhat clean",
+    "lint": "npm run lint:sol && npm run lint:js",
+    "lint:sol": "solhint 'contracts/**/*.sol'",
+    "lint:js": "eslint 'scripts/**/*.js' 'test/**/*.js'",
+    "lint:fix": "npm run lint:sol && eslint --fix 'scripts/**/*.js' 'test/**/*.js'",
+    "format": "prettier --write 'contracts/**/*.sol' 'scripts/**/*.js' 'test/**/*.js'",
+    "format:check": "prettier --check 'contracts/**/*.sol' 'scripts/**/*.js' 'test/**/*.js'",
+    "security": "npm audit && npm run lint:sol",
+    "security:fix": "npm audit fix",
+    "size": "CONTRACT_SIZER=true hardhat compile",
+    "prepare": "husky install",
+    "pre-commit": "npm run format:check && npm run lint && npm test",
+    "ci": "npm run format:check && npm run lint && npm run compile && npm test && npm run test:coverage"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "privacy",
+    "evidence-management",
+    "fhe",
+    "fhevm",
+    "zama",
+    "hardhat",
+    "solidity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "hardhat": "^2.19.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "hardhat-contract-sizer": "^2.10.0",
+    "solidity-coverage": "^0.8.5",
+    "prettier": "^3.1.0",
+    "prettier-plugin-solidity": "^1.2.0",
+    "solhint": "^4.0.0",
+    "eslint": "^8.55.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.0"
+  },
+  "lint-staged": {
+    "*.sol": [
+      "prettier --write",
+      "solhint"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}
