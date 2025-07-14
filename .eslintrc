@@ -1,0 +1,47 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": "off",
+    "prefer-const": "error",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-template": "error",
+    "prefer-arrow-callback": "error",
+    "arrow-spacing": "error",
+    "no-duplicate-imports": "error",
+    "no-useless-concat": "error",
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": true
+    }],
+    "max-len": ["warn", { "code": 120, "ignoreComments": true }],
+    "complexity": ["warn", 10],
+    "max-depth": ["warn", 4],
+    "max-lines-per-function": ["warn", { "max": 50, "skipBlankLines": true, "skipComments": true }]
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*.js"],
+      "rules": {
+        "max-lines-per-function": "off"
+      }
+    }
+  ]
+}
