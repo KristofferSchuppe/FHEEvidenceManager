@@ -1,0 +1,65 @@
+codecov:
+  require_ci_to_pass: yes
+  notify:
+    wait_for_ci: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 2%
+        base: auto
+        if_ci_failed: error
+
+    patch:
+      default:
+        target: 70%
+        threshold: 5%
+        base: auto
+
+  changes:
+    default:
+      if_ci_failed: error
+
+ignore:
+  - "test/**/*"
+  - "scripts/**/*"
+  - "node_modules/**/*"
+  - "coverage/**/*"
+  - "**/*.test.js"
+  - "**/*.spec.js"
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+  require_base: no
+  require_head: yes
+
+flags:
+  unittests:
+    paths:
+      - contracts/
+    carryforward: true
+
+  smartcontracts:
+    paths:
+      - contracts/
+    carryforward: true
+
+  ci-ubuntu-latest-node18.x:
+    carryforward: true
+
+  ci-ubuntu-latest-node20.x:
+    carryforward: true
+
+  ci-windows-latest-node18.x:
+    carryforward: true
+
+  ci-windows-latest-node20.x:
+    carryforward: true
