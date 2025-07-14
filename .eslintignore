@@ -1,0 +1,11 @@
+node_modules
+artifacts
+cache
+coverage
+dist
+build
+typechain-types
+deployments
+*.config.js
+.env
+.env.*
