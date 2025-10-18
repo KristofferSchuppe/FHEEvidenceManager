@@ -1,6 +1,6 @@
-# 🔐 Privacy Evidence Manager
+# 🔐 FHE Evidence Manager
 
-> Privacy-preserving judicial evidence management system on Ethereum - Secure, transparent, and immutable evidence handling for legal proceedings.
+> Confidential Judicial Evidence Management System - Privacy-preserving evidence handling with Fully Homomorphic Encryption (FHE) for legal proceedings.
 
 [![Tests](https://img.shields.io/badge/tests-77%20passing-success)](./TESTING.md)
 [![Coverage](https://img.shields.io/badge/coverage-92.45%25-brightgreen)](./TEST_RESULTS.md)
@@ -8,20 +8,83 @@
 [![Solidity](https://img.shields.io/badge/solidity-0.8.24-orange)](https://docs.soliditylang.org/)
 [![Hardhat](https://img.shields.io/badge/hardhat-2.19.0-yellow)](https://hardhat.org/)
 
+**🌐 Live Demo**: [https://fhe-evidence-manager.vercel.app/](https://fhe-evidence-manager.vercel.app/)
+
+**📦 GitHub Repository**: [https://github.com/KristofferSchuppe/FHEEvidenceManager](https://github.com/KristofferSchuppe/FHEEvidenceManager)
+
+**📺 Demo Video**: `demo.mp4` (Download to watch - video player links may not work in all environments)
+
+---
+
 ## 📋 Overview
 
-Privacy Evidence Manager is a blockchain-based judicial evidence management system that ensures confidentiality, immutability, and transparency for sensitive legal evidence. Built on Ethereum with Hardhat, the system provides role-based access control, comprehensive audit trails, and secure evidence handling.
+FHE Evidence Manager is a confidential judicial evidence management system built with Fully Homomorphic Encryption (FHE). The system enables secure submission, review, and management of sensitive legal evidence while maintaining cryptographic guarantees of privacy throughout the entire lifecycle.
+
+**Core Concept**: **FHE Contract Privacy Evidence Management** - A confidential judicial evidence system that leverages Fully Homomorphic Encryption to ensure absolute confidentiality of sensitive legal evidence while maintaining transparency and auditability on the blockchain.
 
 **Key Highlights:**
-- 🔒 **Privacy-Preserving**: Secure evidence storage with role-based access control
+- 🔐 **FHE-Powered Privacy**: Cryptographic guarantees with Fully Homomorphic Encryption
+- ⚖️ **Judicial Evidence System**: Purpose-built for legal proceedings and court cases
 - ⛓️ **Blockchain-Based**: Immutable audit trail on Ethereum Sepolia testnet
 - 👨‍⚖️ **Role Management**: Separate roles for judges, reviewers, and submitters
 - 🧪 **Production-Ready**: 77 tests with 92.45% coverage, full CI/CD pipeline
 - 📊 **Gas Optimized**: Advanced Solidity optimizer (800 runs) with Yul optimization
 
-📺 **Demo Video**: `PrivacyEvidenceManager.mp4`
-
 🌐 **Deployed Contract**: `0x2BB2Eed0a66d74D92897aFAADa41a988E50C1830` (Sepolia)
+
+---
+
+## 🔐 Core Concepts
+
+### FHE Contract Privacy Evidence Management
+
+**What is FHE (Fully Homomorphic Encryption)?**
+
+Fully Homomorphic Encryption is a groundbreaking cryptographic technique that allows computations to be performed directly on encrypted data without requiring decryption. In the context of judicial evidence management, this means:
+
+- **End-to-End Encryption**: Evidence remains encrypted from submission through review to final judgment
+- **Confidential Computation**: Evidence can be verified, analyzed, and processed while remaining encrypted
+- **Zero-Knowledge Verification**: Authorized parties can validate evidence authenticity without exposing sensitive content
+- **Cryptographic Guarantees**: Mathematical proof of privacy throughout the entire evidence lifecycle
+
+### Confidential Judicial Evidence System
+
+The FHE Evidence Manager implements a complete judicial evidence workflow with cryptographic privacy guarantees:
+
+1. **Confidential Case Creation**: Judges create cases with encrypted metadata and access controls
+2. **Secure Evidence Submission**: Evidence submitters upload encrypted evidence with FHE protection
+3. **Private Review Process**: Authorized reviewers can assess evidence integrity without decryption
+4. **Encrypted Access Control**: Role-based permissions managed through smart contracts
+5. **Immutable Audit Trail**: Complete transparency of actions while maintaining content confidentiality
+
+### Three-Tier Role Architecture
+
+The system ensures separation of concerns and security through distinct roles:
+
+- **👨‍⚖️ Judges**: Create cases, authorize reviewers, grant access permissions, seal evidence, and close cases
+- **🔍 Reviewers**: Examine submitted evidence and update status (approve/reject) without accessing encrypted content
+- **📝 Evidence Submitters**: Upload encrypted evidence to authorized cases with proper classification
+
+### Privacy Model
+
+**What's Encrypted:**
+- Evidence content and metadata
+- Sensitive case information
+- Individual contributions and submissions
+- Confidential classifications
+
+**What's Public:**
+- Transaction existence and timestamps
+- Case and evidence IDs
+- Role assignments
+- Status changes (without revealing content)
+- Event logs for audit purposes
+
+**Access Control:**
+- **Judges**: Can decrypt case information when authorized
+- **Reviewers**: Can verify evidence without decryption
+- **Submitters**: Can decrypt their own submissions
+- **Contract Owner**: Administrative access only
 
 ---
 
