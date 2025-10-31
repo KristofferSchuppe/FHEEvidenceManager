@@ -23,7 +23,7 @@ This repository contains a comprehensive suite of blockchain development project
 ### 📦 Repository Structure
 
 ```
-D:\/
+D:\
 ├── 📝 Smart Contract Project (Root)
 │   ├── contracts/              # Solidity smart contracts
 │   ├── test/                   # Comprehensive test suite (77 tests)
@@ -415,11 +415,11 @@ node scripts/simulate.js
 - **ethers.js** `6.9.0` - Blockchain interaction library
 
 **Frontend:**
-- **Vanilla JavaScript** - Lightweight, no framework overhead
+- **React** `18.2.0` - Modern UI library for building user interfaces
+- **Vite** `5.0.0` - Fast build tool and dev server
+- **TypeScript** `5.3.3` - Type-safe development
 - **Modern CSS** - Glassmorphism design, responsive layout
-- **React** `18.2.0` (Optional) - React version available
-- **Vite** `5.0.0` (Optional) - Fast build tool
-- **Web3 Integration** - Direct smart contract calls
+- **Web3 Integration** - Direct smart contract calls via ethers.js
 - **MetaMask** - Wallet integration
 
 **Cryptography:**
