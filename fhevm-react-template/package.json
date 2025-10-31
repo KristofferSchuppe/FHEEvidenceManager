@@ -1,0 +1,45 @@
+{
+  "name": "fhevm-toolkit",
+  "version": "1.0.0",
+  "description": "Universal FHEVM SDK and Example Applications - Zama FHEVM Challenge Submission",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build:sdk",
+    "build:sdk": "cd packages/fhevm-sdk && npm run build",
+    "dev:nextjs": "cd examples/nextjs-evidence-manager && npm run dev",
+    "dev:evidence": "cd examples/privacy-evidence-manager && npm run dev",
+    "install:all": "npm install && npm install --workspaces",
+    "clean": "rm -rf node_modules packages/*/node_modules examples/*/node_modules packages/*/dist",
+    "test": "cd packages/fhevm-sdk && npm test",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "keywords": [
+    "fhevm",
+    "fhe",
+    "encryption",
+    "blockchain",
+    "ethereum",
+    "privacy",
+    "confidential",
+    "zama",
+    "sdk",
+    "monorepo"
+  ],
+  "author": "FHEVM Toolkit Contributors",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

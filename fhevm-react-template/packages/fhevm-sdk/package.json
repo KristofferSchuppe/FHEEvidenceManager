@@ -1,0 +1,43 @@
+{
+  "name": "@fhevm-toolkit/sdk",
+  "version": "1.0.0",
+  "description": "Universal FHEVM SDK - Framework-agnostic toolkit for building confidential dApps",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "fhevm",
+    "fhe",
+    "encryption",
+    "blockchain",
+    "ethereum",
+    "privacy",
+    "confidential",
+    "zama"
+  ],
+  "author": "FHEVM Toolkit Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "fhevmjs": "^0.5.0",
+    "ethers": "^6.9.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/node": "^20.10.5",
+    "rollup": "^4.9.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
