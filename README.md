@@ -1,6 +1,6 @@
-# 🔐 FHE Evidence Manager
+# 🔐 FHE Evidence Manager - Complete Blockchain Development Suite
 
-> Confidential Judicial Evidence Management System - Privacy-preserving evidence handling with Fully Homomorphic Encryption (FHE) for legal proceedings.
+> Confidential Judicial Evidence Management System - Privacy-preserving evidence handling with Fully Homomorphic Encryption (FHE) for legal proceedings. A comprehensive multi-project repository showcasing smart contracts, testing infrastructure, and frontend applications.
 
 [![Tests](https://img.shields.io/badge/tests-77%20passing-success)](./TESTING.md)
 [![Coverage](https://img.shields.io/badge/coverage-92.45%25-brightgreen)](./TEST_RESULTS.md)
@@ -18,19 +18,60 @@
 
 ## 📋 Overview
 
-FHE Evidence Manager is a confidential judicial evidence management system built with Fully Homomorphic Encryption (FHE). The system enables secure submission, review, and management of sensitive legal evidence while maintaining cryptographic guarantees of privacy throughout the entire lifecycle.
+This repository contains a comprehensive suite of blockchain development projects centered around the FHE Evidence Manager - a confidential judicial evidence management system built with Fully Homomorphic Encryption (FHE). The system enables secure submission, review, and management of sensitive legal evidence while maintaining cryptographic guarantees of privacy throughout the entire lifecycle.
+
+### 📦 Repository Structure
+
+```
+D:\/
+├── 📝 Smart Contract Project (Root)
+│   ├── contracts/              # Solidity smart contracts
+│   ├── test/                   # Comprehensive test suite (77 tests)
+│   ├── scripts/                # Deploy & interact scripts
+│   └── hardhat.config.js       # Hardhat configuration
+│
+├── 🎨 FHEVM React Template
+│   └── fhevm-react-template/   # Complete SDK & templates
+│       ├── packages/fhevm-sdk/         # Universal FHEVM SDK
+│       ├── templates/                  # Framework templates (Next.js, React, Vue, Node.js)
+│       ├── examples/                   # Example applications
+│       └── docs/                       # Complete documentation
+│
+└── 🔐 Privacy Evidence Manager
+    └── privacy-evidence-manager/      # Standalone project
+        ├── Smart contracts           # Full FHE implementation
+        ├── Frontend (HTML/CSS/JS)    # Web interface
+        ├── README.md                 # Project documentation
+        └── Demo files                # Screenshots & videos
+```
 
 **Core Concept**: **FHE Contract Privacy Evidence Management** - A confidential judicial evidence system that leverages Fully Homomorphic Encryption to ensure absolute confidentiality of sensitive legal evidence while maintaining transparency and auditability on the blockchain.
 
-**Key Highlights:**
-- 🔐 **FHE-Powered Privacy**: Cryptographic guarantees with Fully Homomorphic Encryption
-- ⚖️ **Judicial Evidence System**: Purpose-built for legal proceedings and court cases
-- ⛓️ **Blockchain-Based**: Immutable audit trail on Ethereum Sepolia testnet
-- 👨‍⚖️ **Role Management**: Separate roles for judges, reviewers, and submitters
-- 🧪 **Production-Ready**: 77 tests with 92.45% coverage, full CI/CD pipeline
-- 📊 **Gas Optimized**: Advanced Solidity optimizer (800 runs) with Yul optimization
+### 🌟 Projects Overview
 
-🌐 **Deployed Contract**: `0x2BB2Eed0a66d74D92897aFAADa41a988E50C1830` (Sepolia)
+#### 1. **Root Smart Contract Project** (Main Project)
+Located at repository root - Complete Hardhat development environment
+- 🔐 FHE-Powered Privacy with cryptographic guarantees
+- ⚖️ Purpose-built for legal proceedings and court cases
+- 🧪 77 tests with 92.45% coverage, full CI/CD pipeline
+- 📊 Gas optimized (800 runs) with Yul optimization
+- 🌐 Deployed on Sepolia: `0x2BB2Eed0a66d74D92897aFAADa41a988E50C1830`
+
+#### 2. **FHEVM React Template** (`fhevm-react-template/`)
+Universal SDK and multi-framework templates
+- 📦 Complete FHEVM SDK package (`@fhevm-toolkit/sdk`)
+- 🎨 Framework templates: Next.js, React, Vue, Node.js
+- 📱 Multiple example applications
+- 📚 Comprehensive documentation
+- 🚀 Production-ready with TypeScript support
+
+#### 3. **Privacy Evidence Manager** (`privacy-evidence-manager/`)
+Standalone project with full implementation
+- 🔒 Complete FHE smart contract implementation
+- 🌐 Web interface (HTML/CSS/JavaScript)
+- 📺 Demo video and screenshots included
+- 🎯 Live demo: [https://privacy-evidence-manager.vercel.app/](https://privacy-evidence-manager.vercel.app/)
+- 📖 Detailed documentation with architecture guides
 
 ---
 
@@ -195,18 +236,58 @@ node --version  # v18.x or v20.x
 npm --version  # v9.x or later
 ```
 
-### Installation
+### Choose Your Starting Point
+
+#### Option 1: Root Smart Contract Project (Recommended for Smart Contract Development)
 
 ```bash
-# Clone repository
-git clone https://github.com/your-org/privacy-evidence-manager.git
-cd privacy-evidence-manager
+# Navigate to repository root
+cd 
 
 # Install dependencies
 npm install
 
 # Copy environment configuration
 cp .env.example .env
+
+# Compile contracts
+npm run compile
+
+# Run tests
+npm test
+```
+
+#### Option 2: FHEVM React Template (Recommended for Full-Stack Development)
+
+```bash
+# Navigate to FHEVM template
+cd /fhevm-react-template
+
+# Install all dependencies
+npm install
+
+# Build SDK
+npm run build
+
+# Run Next.js example
+npm run dev:nextjs
+```
+
+#### Option 3: Privacy Evidence Manager (Standalone Project)
+
+```bash
+# Navigate to standalone project
+cd /privacy-evidence-manager
+
+# Install dependencies
+npm install
+
+# Compile contracts
+npm run compile
+
+# Run frontend (open index.html in browser)
+# Or use React version:
+npm run frontend
 ```
 
 ### Configuration
@@ -274,13 +355,15 @@ node scripts/simulate.js
 
 ## 🔧 Tech Stack
 
-### Smart Contracts
+### Root Project (Smart Contract Development)
+
+**Blockchain & Smart Contracts:**
 - **Solidity** `0.8.24` - Smart contract language (Cancun EVM)
 - **Hardhat** `2.19.0` - Development framework
 - **OpenZeppelin Contracts** `5.0.0` - Security-audited utilities
 - **ethers.js** `6.9.0` - Ethereum library
 
-### Development Tools
+**Development Tools:**
 - **Mocha + Chai** - Testing framework (77 tests)
 - **Hardhat Coverage** - Code coverage reporting (92.45%)
 - **Hardhat Gas Reporter** - Gas usage optimization
@@ -288,14 +371,14 @@ node scripts/simulate.js
 - **ESLint** `8.56.0` - JavaScript linter
 - **Prettier** `3.1.1` - Code formatter
 
-### Code Quality & Security
+**Code Quality & Security:**
 - **Husky** `8.0.3` - Git hooks (pre-commit, pre-push, commit-msg)
 - **lint-staged** `15.2.0` - Pre-commit linting
 - **npm audit** - Dependency vulnerability scanning
 - **Solidity Optimizer** - 800 runs with Yul optimization
 - **Codecov** - Test coverage tracking
 
-### CI/CD
+**CI/CD:**
 - **GitHub Actions** - Automated workflows
   - `test.yml` - Multi-version testing (Node 18.x, 20.x)
   - `ci.yml` - Multi-platform CI (Ubuntu, Windows)
@@ -303,10 +386,52 @@ node scripts/simulate.js
   - `deploy.yml` - Automated deployment
   - `release.yml` - Release automation
 
-### Network
+### FHEVM React Template
+
+**SDK & Core:**
+- **TypeScript** `5.3.3` - Type-safe development
+- **Rollup** - Package bundler
+- **fhevmjs** `0.5.0` - FHE JavaScript library
+- **ethers.js** `6.9.0` - Blockchain interaction
+
+**Frontend Frameworks:**
+- **Next.js** `14.0.4` - React framework with App Router
+- **React** `18.2.0` - UI library
+- **Vue** `3.3.0` - Progressive framework
+- **Vite** `5.0.0` - Build tool
+- **Tailwind CSS** `3.4.0` - Utility-first CSS
+
+**Development Tools:**
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **TypeScript** - Type checking across all templates
+
+### Privacy Evidence Manager (Standalone)
+
+**Smart Contracts:**
+- **Solidity** `0.8.24` - Smart contract development
+- **Hardhat** `2.19.0` - Development environment
+- **fhEVM by Zama** - FHE implementation for Ethereum
+- **ethers.js** `6.9.0` - Blockchain interaction library
+
+**Frontend:**
+- **Vanilla JavaScript** - Lightweight, no framework overhead
+- **Modern CSS** - Glassmorphism design, responsive layout
+- **React** `18.2.0` (Optional) - React version available
+- **Vite** `5.0.0` (Optional) - Fast build tool
+- **Web3 Integration** - Direct smart contract calls
+- **MetaMask** - Wallet integration
+
+**Cryptography:**
+- **FHE (Fully Homomorphic Encryption)** - Zama's fhEVM library
+- **Encrypted State Variables** - euint8, euint32, euint64 types
+- **Access Control Lists** - Encrypted permission management
+
+### Network Deployment
 - **Sepolia Testnet** - Chain ID: 11155111
 - **Etherscan** - Contract verification
 - **MetaMask** - Wallet integration
+- **Vercel** - Frontend hosting
 
 ---
 
@@ -628,17 +753,27 @@ See [CI_CD_DOCUMENTATION.md](./CI_CD_DOCUMENTATION.md) for workflow details.
 
 ## 📚 Documentation
 
-### Core Documentation
+### Root Project Documentation
 - **[TESTING.md](./TESTING.md)** - Complete testing guide (77 tests, 92.45% coverage)
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deployment instructions for Sepolia and mainnet
 - **[SECURITY_PERFORMANCE.md](./SECURITY_PERFORMANCE.md)** - Security audit and gas optimization guide
 - **[CI_CD_DOCUMENTATION.md](./CI_CD_DOCUMENTATION.md)** - GitHub Actions workflow details
 - **[WORKFLOW.md](./WORKFLOW.md)** - Development workflow and best practices
-
-### Additional Resources
 - **[TEST_RESULTS.md](./TEST_RESULTS.md)** - Detailed test execution results
 - **[SETUP_COMPLETE.md](./SETUP_COMPLETE.md)** - Quick reference guide
 - **[.env.example](./.env.example)** - Environment configuration template (50+ variables)
+
+### FHEVM React Template Documentation
+- **[fhevm-react-template/README.md](./fhevm-react-template/README.md)** - Complete SDK guide
+- **[fhevm-react-template/docs/SDK_GUIDE.md](./fhevm-react-template/docs/SDK_GUIDE.md)** - SDK usage guide
+- **[fhevm-react-template/docs/API_REFERENCE.md](./fhevm-react-template/docs/API_REFERENCE.md)** - API documentation
+- **[fhevm-react-template/docs/INTEGRATION.md](./fhevm-react-template/docs/INTEGRATION.md)** - Framework integration
+- **[fhevm-react-template/WORK_COMPLETED.md](./fhevm-react-template/WORK_COMPLETED.md)** - Implementation summary
+
+### Privacy Evidence Manager Documentation
+- **[privacy-evidence-manager/README.md](./privacy-evidence-manager/README.md)** - Complete project guide
+- **Demo Video**: [privacy-evidence-manager/PrivacyEvidenceManager.mp4](./privacy-evidence-manager/PrivacyEvidenceManager.mp4)
+- **Screenshots**: [privacy-evidence-manager/PrivacyEvidenceManager.png](./privacy-evidence-manager/PrivacyEvidenceManager.png)
 
 ---
 
@@ -741,14 +876,24 @@ Examples:
 - [x] Sepolia testnet deployment
 - [x] CI/CD pipeline setup
 - [x] Security audits and gas optimization
+- [x] **FHEVM React Template** - Universal SDK with multi-framework support
+- [x] **Privacy Evidence Manager** - Standalone web interface implementation
 
-### Phase 2 (In Progress) 🚧
-- [ ] Frontend web application (React/Next.js)
+### Phase 2 (Completed) ✅
+- [x] **FHEVM SDK Package** - Framework-agnostic toolkit
+- [x] **Next.js Templates** - Multiple Next.js examples with FHE integration
+- [x] **React Components** - Reusable FHE components
+- [x] **Vue Template** - Vue 3 Composition API support
+- [x] **Node.js Template** - Server-side FHE operations
+- [x] **Frontend Applications** - Multiple working examples
+
+### Phase 3 (In Progress) 🚧
 - [ ] IPFS integration for evidence storage
 - [ ] Mobile app (React Native)
 - [ ] Multi-chain deployment (Polygon, Arbitrum)
+- [ ] Enhanced UI/UX improvements
 
-### Phase 3 (Planned) 📋
+### Phase 4 (Planned) 📋
 - [ ] Advanced encryption features
 - [ ] Oracle integration for real-world data
 - [ ] Governance token and DAO
@@ -809,6 +954,15 @@ This project builds on the excellent work of:
 
 ## 📊 Project Stats
 
+### Repository Overview
+```
+📦 Total Projects: 3
+├── Root Smart Contract Project
+├── FHEVM React Template
+└── Privacy Evidence Manager
+```
+
+### Root Project Stats
 ```
 📦 Smart Contracts: 1
 🧪 Tests: 77 passing
@@ -819,8 +973,62 @@ This project builds on the excellent work of:
 📝 Documentation: Complete
 ```
 
+### FHEVM React Template Stats
+```
+📦 SDK Package: @fhevm-toolkit/sdk
+🎨 Framework Templates: 4 (Next.js, React, Vue, Node.js)
+📱 Examples: 3 complete applications
+📝 Documentation: 10+ files
+🚀 Production Ready: TypeScript + Testing
+💾 Total Files: 100+ created
+```
+
+### Privacy Evidence Manager Stats
+```
+📦 Smart Contract: Full FHE implementation
+🌐 Web Interface: HTML/CSS/JS + React version
+📺 Demo Video: PrivacyEvidenceManager.mp4
+🎯 Live Demo: https://privacy-evidence-manager.vercel.app/
+📖 Documentation: Complete with architecture guides
+🔒 FHE Integration: Zama fhEVM
+```
+
+---
+
+---
+
+## 🗺️ Navigation
+
+This repository contains three interconnected projects. For detailed navigation guide, see **[PROJECT_NAVIGATION.md](./PROJECT_NAVIGATION.md)**.
+
+**Quick Links:**
+- 📝 **Root Project** (Current) - Smart contract development
+- 🎨 **[FHEVM React Template](./fhevm-react-template/)** - SDK & templates
+- 🔐 **[Privacy Evidence Manager](./privacy-evidence-manager/)** - Standalone application
+
 ---
 
 **Built with 🔒 for secure and transparent judicial evidence management**
 
 *Privacy • Security • Transparency*
+
+---
+
+## 🌟 Repository Highlights
+
+### Complete Development Suite
+This repository provides everything needed for FHE-based blockchain development:
+- ✅ Production-ready smart contracts
+- ✅ Universal SDK for multiple frameworks
+- ✅ Complete example applications
+- ✅ Comprehensive testing infrastructure
+- ✅ Full documentation
+
+### Multiple Entry Points
+Choose your starting point based on your needs:
+1. **Smart Contract Focus** → Start with root project
+2. **Full-Stack Development** → Start with FHEVM template
+3. **Explore Working App** → Start with Privacy Evidence Manager
+
+### Active Development
+All three projects are actively maintained and production-ready.
