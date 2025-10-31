@@ -40,7 +40,7 @@ D:\
 └── 🔐 Privacy Evidence Manager
     └── privacy-evidence-manager/      # Standalone project
         ├── Smart contracts           # Full FHE implementation
-        ├── Frontend (HTML/CSS/JS)    # Web interface
+        ├── Frontend (React + Vite)   # Modern web interface
         ├── README.md                 # Project documentation
         └── Demo files                # Screenshots & videos
 ```
@@ -68,7 +68,7 @@ Universal SDK and multi-framework templates
 #### 3. **Privacy Evidence Manager** (`privacy-evidence-manager/`)
 Standalone project with full implementation
 - 🔒 Complete FHE smart contract implementation
-- 🌐 Web interface (HTML/CSS/JavaScript)
+- 🌐 Modern React web interface with Vite + TypeScript
 - 📺 Demo video and screenshots included
 - 🎯 Live demo: [https://privacy-evidence-manager.vercel.app/](https://privacy-evidence-manager.vercel.app/)
 - 📖 Detailed documentation with architecture guides
@@ -285,9 +285,11 @@ npm install
 # Compile contracts
 npm run compile
 
-# Run frontend (open index.html in browser)
-# Or use React version:
+# Run frontend development server
 npm run frontend
+
+# Build for production
+npm run build:frontend
 ```
 
 ### Configuration
@@ -986,7 +988,7 @@ This project builds on the excellent work of:
 ### Privacy Evidence Manager Stats
 ```
 📦 Smart Contract: Full FHE implementation
-🌐 Web Interface: HTML/CSS/JS + React version
+🌐 Web Interface: React + Vite + TypeScript
 📺 Demo Video: PrivacyEvidenceManager.mp4
 🎯 Live Demo: https://privacy-evidence-manager.vercel.app/
 📖 Documentation: Complete with architecture guides
