@@ -21,7 +21,7 @@ module.exports = {
         }
       },
       evmVersion: "cancun",
-      viaIR: false, // Set to true for advanced optimization
+      viaIR: true, // Enabled for stack too deep issues
       metadata: {
         bytecodeHash: "none" // Reduces bytecode size
       }

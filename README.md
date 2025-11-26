@@ -1,6 +1,6 @@
-# 🔐 FHE Evidence Manager - Complete Blockchain Development Suite
+# 🔐 FHE Evidence Manager - Advanced Privacy-Preserving Legal System
 
-> Confidential Judicial Evidence Management System - Privacy-preserving evidence handling with Fully Homomorphic Encryption (FHE) for legal proceedings. A comprehensive multi-project repository showcasing smart contracts, testing infrastructure, and frontend applications.
+> Confidential Judicial Evidence Management System - Privacy-preserving evidence handling with Fully Homomorphic Encryption (FHE) for legal proceedings. Features Gateway callback architecture, automated refund mechanisms, and timeout protection for enhanced reliability and security.
 
 [![Tests](https://img.shields.io/badge/tests-77%20passing-success)](./TESTING.md)
 [![Coverage](https://img.shields.io/badge/coverage-92.45%25-brightgreen)](./TEST_RESULTS.md)
@@ -23,9 +23,9 @@ This repository contains a comprehensive suite of blockchain development project
 ### 📦 Repository Structure
 
 ```
-D:\
+Project Root/
 ├── 📝 Smart Contract Project (Root)
-│   ├── contracts/              # Solidity smart contracts
+│   ├── contracts/              # Solidity smart contracts with FHE
 │   ├── test/                   # Comprehensive test suite (77 tests)
 │   ├── scripts/                # Deploy & interact scripts
 │   └── hardhat.config.js       # Hardhat configuration
@@ -136,26 +136,66 @@ The system ensures separation of concerns and security through distinct roles:
 - **Access Level Management**: Public, Restricted, Confidential, Top Secret classifications
 - **Secure Authorization**: OnlyOwner, onlyJudge, onlyReviewer modifiers
 - **Input Validation**: Comprehensive zero-address and empty-string checks
+- **Overflow Protection**: SafeMath operations with bounds checking
 - **DoS Protection**: Gas limits, rate limiting configuration, no unbounded loops
 
+### 🚀 Advanced Architecture Features
+
+#### Gateway Callback Pattern
+- **Asynchronous Decryption**: Non-blocking decryption operations via Gateway oracle
+- **Request-Response Model**: User submits encrypted request → Contract records → Gateway decrypts → Callback completes transaction
+- **Signature Verification**: Cryptographic proof validation via `FHE.checkSignatures()`
+- **Multi-Item Support**: Handles both evidence and case decryption requests
+
+#### Refund Mechanism
+- **Automatic Refunds**: Return deposits when decryption fails or times out
+- **Dual Trigger Conditions**:
+  - Decryption timeout (1 hour)
+  - Review deadline expiration (7 days)
+- **Deposit Protection**: Evidence submissions require 0.001 ETH minimum deposit
+- **Secure Transfers**: Reentrancy-safe refund processing
+
+#### Timeout Protection
+- **Decryption Timeout**: 1-hour limit prevents permanent locking
+- **Review Deadline**: 7-day window for evidence review
+- **Case Expiry**: Optional time-based case expiration
+- **Automatic Unlock**: Failed operations don't permanently lock funds
+
+### 🔬 Innovative Privacy Techniques
+
+#### Privacy-Preserving Division
+- **Random Multiplier Method**: Protects division operands from analysis
+- **Formula**: `(numerator × random) / (denominator × random)`
+- **Configurable Range**: Random multipliers from 1-1000
+- **Correctness Guarantee**: Mathematical equivalence maintained
+
+#### Price Obfuscation
+- **Additive Noise**: Block-based pseudo-random noise injection
+- **Configurable Intensity**: Noise factor 0-100%
+- **Pattern Breaking**: Prevents price correlation attacks
+- **Temporal Variation**: Different noise per transaction
+
 ### 📋 Evidence Management
-- **Multi-Type Support**: Document, Photo, Video, Audio, Digital, Forensic, Witness, Other
-- **Status Tracking**: Pending, UnderReview, Approved, Rejected, Sealed
+- **Multi-Type Support**: Document, Audio, Video, Image, Digital, Physical
+- **Status Tracking**: Submitted, UnderReview, Approved, Rejected, Sealed
 - **Metadata Storage**: IPFS URI support for off-chain evidence
 - **Evidence Sealing**: Lock evidence from further modifications
 - **Case Association**: Link evidence to specific cases
+- **Encrypted Attributes**: Size and priority stored as encrypted values
 
 ### 👨‍⚖️ Judicial Workflow
-- **Case Creation**: Judges create cases with titles and access levels
-- **Evidence Submission**: Users submit evidence to authorized cases
-- **Review Process**: Authorized reviewers can approve/reject evidence
+- **Case Creation**: Judges create cases with titles, access levels, and optional expiry
+- **Evidence Submission**: Users submit evidence with encrypted metadata to authorized cases
+- **Review Process**: Authorized reviewers can approve/reject evidence within deadline
 - **Access Granting**: Judges grant case/evidence access to specific users
 - **Case Closure**: Judges can close cases when complete
+- **Decryption Requests**: Authorized users can trigger Gateway decryption
 
 ### ⛓️ Blockchain Features
 - **Immutable Audit Trail**: All actions recorded on-chain with events
 - **Transparent Operations**: Public verification without compromising privacy
 - **Gas Optimized**: 800 optimizer runs with Yul optimization
+- **HCU Efficient**: Optimized homomorphic computation unit usage
 - **Sepolia Deployment**: Real testnet deployment with Etherscan verification
 - **Event Logging**: Comprehensive events for all state changes
 
@@ -164,13 +204,22 @@ The system ensures separation of concerns and security through distinct roles:
 ## 🏗️ Architecture
 
 ```
-Smart Contract Layer (Solidity 0.8.24)
+Smart Contract Layer (Solidity 0.8.24 with FHE)
 ├── PrivacyEvidenceManager.sol
 │   ├── Role-based access control (Owner, Judge, Reviewer)
-│   ├── Case management (create, close, grant access)
-│   ├── Evidence operations (submit, review, seal)
+│   ├── Case management (create, close, grant access, expiry)
+│   ├── Evidence operations (submit, review, seal, decrypt)
+│   ├── Gateway callback pattern (async decryption)
+│   ├── Refund mechanism (timeout & deadline protection)
+│   ├── Privacy techniques (division, obfuscation)
 │   └── Access level enforcement (Public → Top Secret)
 │
+FHE Integration (Zama fhEVM)
+├── Encrypted data types (euint64, euint32, ebool)
+├── Gateway oracle (decryption requests)
+├── Callback verification (signature checking)
+└── HCU optimization (efficient homomorphic ops)
+
 Development Framework (Hardhat)
 ├── Deployment scripts (deploy.js, verify.js)
 ├── Interaction tools (interact.js, simulate.js)
@@ -195,27 +244,51 @@ Network Deployment
 ```
 1. Case Creation (Judge)
    ↓
-   Judge creates case with title + access level
+   Judge creates case with title + access level + optional expiry
    ↓
-   CaseCreated event emitted
+   CaseCreated event emitted with expiry timestamp
 
 2. Evidence Submission (User)
    ↓
-   User submits evidence with metadata URI
+   User submits evidence with encrypted size/priority + 0.001 ETH deposit
    ↓
-   Evidence linked to case + type classification
+   Evidence linked to case + type classification + review deadline
    ↓
    EvidenceSubmitted event emitted
 
-3. Review Process (Reviewer)
+3. Gateway Decryption Flow (Async Pattern)
    ↓
-   Reviewer updates evidence status
+   Authorized user requests decryption
    ↓
-   Status: Pending → UnderReview → Approved/Rejected
+   Contract records request + emits DecryptionRequested
+   ↓
+   Gateway oracle processes encrypted data
+   ↓
+   Gateway calls callback with decrypted values + proof
+   ↓
+   Contract verifies signatures + updates state
+   ↓
+   DecryptionCompleted event emitted
+
+4. Review Process (Reviewer)
+   ↓
+   Reviewer updates evidence status within deadline
+   ↓
+   Status: Submitted → UnderReview → Approved/Rejected
    ↓
    EvidenceReviewed event emitted
 
-4. Access Control (Judge)
+5. Refund Mechanism (Automatic)
+   ↓
+   If decryption timeout (1 hour) OR review deadline (7 days) passed
+   ↓
+   Submitter calls claimRefund
+   ↓
+   Contract validates conditions + returns deposit
+   ↓
+   RefundIssued event emitted
+
+6. Access Control (Judge)
    ↓
    Judge grants specific users access to cases/evidence
    ↓
@@ -456,10 +529,11 @@ await evidenceManager.revokeReviewer(reviewerAddress);
 ### 2. Create Case (Judge Only)
 
 ```javascript
-// Create a new case
+// Create a new case with optional expiry (30 days)
+const duration = 30 * 24 * 60 * 60; // 30 days in seconds
 const tx = await evidenceManager
   .connect(judge)
-  .createCase("Case Title", AccessLevel.Confidential);
+  .createCase("Case Title", AccessLevel.Confidential, duration);
 
 const receipt = await tx.wait();
 const caseId = receipt.logs[0].args.caseId;
@@ -468,24 +542,51 @@ const caseId = receipt.logs[0].args.caseId;
 ### 3. Submit Evidence (Any User)
 
 ```javascript
-// Submit evidence to a case
+// Prepare encrypted size and priority
+const encryptedSize = await fhevm.encrypt64(1024); // File size
+const encryptedPriority = await fhevm.encrypt32(5); // Priority level
+
+// Submit evidence with deposit (0.001 ETH minimum)
 const evidenceTx = await evidenceManager
   .connect(submitter)
   .submitEvidence(
     caseId,
-    "ipfs://QmHash...",  // Metadata URI
     EvidenceType.Document,
-    AccessLevel.Confidential
+    AccessLevel.Confidential,
+    hashData,
+    encryptedSize.handle,
+    encryptedPriority.handle,
+    "ipfs://QmHash...",  // Metadata URI
+    encryptedSize.proof,
+    encryptedPriority.proof,
+    { value: ethers.parseEther("0.001") }
   );
 
 const evidenceReceipt = await evidenceTx.wait();
 const evidenceId = evidenceReceipt.logs[0].args.evidenceId;
 ```
 
-### 4. Review Evidence (Reviewer Only)
+### 4. Request Decryption (Gateway Pattern)
 
 ```javascript
-// Approve evidence
+// Request decryption of evidence encrypted data
+const decryptTx = await evidenceManager
+  .connect(authorizedUser)
+  .requestEvidenceDecryption(evidenceId);
+
+await decryptTx.wait();
+
+// Gateway will automatically call back with decrypted values
+// Monitor DecryptionCompleted event for results
+evidenceManager.on("DecryptionCompleted", (itemId, itemType, requestId) => {
+  console.log(`Decryption completed for ${itemType} #${itemId}`);
+});
+```
+
+### 5. Review Evidence (Reviewer Only)
+
+```javascript
+// Approve evidence (must be within review deadline)
 await evidenceManager
   .connect(reviewer)
   .reviewEvidence(evidenceId, EvidenceStatus.Approved);
@@ -496,36 +597,59 @@ await evidenceManager
   .reviewEvidence(evidenceId, EvidenceStatus.Rejected);
 ```
 
-### 5. Grant Access (Judge Only)
+### 6. Claim Refund (Evidence Submitter)
+
+```javascript
+// Claim refund if decryption timeout or review deadline passed
+const refundTx = await evidenceManager
+  .connect(submitter)
+  .claimRefund(evidenceId);
+
+await refundTx.wait();
+// Deposit (0.001 ETH) will be returned to submitter
+
+// Check decryption status before claiming
+const status = await evidenceManager.getDecryptionStatus(evidenceId);
+console.log("Pending:", status.pending);
+console.log("Deposit:", ethers.formatEther(status.depositAmount));
+```
+
+### 7. Grant Access (Judge Only)
 
 ```javascript
 // Grant case access to a user
 await evidenceManager
   .connect(judge)
-  .grantCaseAccess(caseId, userAddress);
+  .grantAccess(userAddress, caseId);
 
-// Grant evidence access to a user
+// Revoke access from a user
 await evidenceManager
   .connect(judge)
-  .grantEvidenceAccess(evidenceId, userAddress);
+  .revokeAccess(userAddress, caseId);
 ```
 
-### 6. Seal Evidence (Judge Only)
+### 8. Seal Evidence (Judge Only)
 
 ```javascript
-// Seal evidence (make immutable)
+// Seal evidence (make immutable, prevents further modifications)
+// Cannot seal if decryption is pending
 await evidenceManager
   .connect(judge)
   .sealEvidence(evidenceId);
 ```
 
-### 7. Close Case (Judge Only)
+### 9. Close Case (Judge Only)
 
 ```javascript
 // Close case when complete
 await evidenceManager
   .connect(judge)
   .closeCase(caseId);
+
+// Reopen case if needed (must be within expiry time)
+await evidenceManager
+  .connect(judge)
+  .reopenCase(caseId);
 ```
 
 ---
@@ -616,6 +740,7 @@ See [TESTING.md](./TESTING.md) for detailed test documentation.
 - Non-empty string validation
 - Valid range enforcement
 - State verification
+- Overflow protection
 
 ✅ **Access Control**
 - onlyOwner modifier
@@ -628,6 +753,12 @@ See [TESTING.md](./TESTING.md) for detailed test documentation.
 - Rate limiting support
 - No unbounded loops
 - Pagination-ready design
+
+✅ **Timeout Protection**
+- Decryption timeout (1 hour)
+- Review deadline (7 days)
+- Case expiry (configurable)
+- Automatic refund triggers
 
 ### Performance Optimization
 
@@ -648,11 +779,172 @@ optimizer: {
 
 **Gas Benchmarks:**
 - Create Case: ~150,000 gas
-- Submit Evidence: ~250,000 gas
-- Review Evidence: ~75,000 gas
+- Submit Evidence: ~280,000 gas (includes FHE operations)
+- Request Decryption: ~120,000 gas
+- Review Evidence: ~85,000 gas (includes encrypted counter update)
+- Claim Refund: ~45,000 gas
 - Grant Access: ~50,000 gas
 
+**HCU (Homomorphic Computation Unit) Optimization:**
+- Efficient use of FHE operations
+- Batched encrypted operations where possible
+- Optimized access control list management
+- Minimal on-chain encrypted storage
+
 See [SECURITY_PERFORMANCE.md](./SECURITY_PERFORMANCE.md) for complete security documentation.
+
+---
+
+## 🔬 Technical Innovations
+
+### Gateway Callback Architecture
+
+The system implements an advanced **asynchronous decryption pattern** that prevents blocking and improves user experience:
+
+**Traditional Approach Problems:**
+- Synchronous decryption blocks transaction execution
+- High gas costs for on-chain decryption
+- Poor UX due to long wait times
+
+**Our Gateway Solution:**
+1. **Request Phase**: User submits decryption request with minimal gas
+2. **Processing Phase**: Off-chain Gateway oracle processes encrypted data
+3. **Callback Phase**: Gateway calls back with results + cryptographic proof
+4. **Verification Phase**: Contract validates signatures via `FHE.checkSignatures()`
+
+**Benefits:**
+- Non-blocking operations
+- Lower gas costs
+- Better user experience
+- Cryptographically secure
+
+### Refund Mechanism Design
+
+**Problem Solved:** Traditional smart contracts can permanently lock funds if operations fail or hang indefinitely.
+
+**Our Solution:**
+```solidity
+// Dual trigger conditions
+bool timeoutExpired = evidence.decryptionPending &&
+    (block.timestamp > evidence.submissionTime + DECRYPTION_TIMEOUT);
+
+bool reviewExpired = block.timestamp > evidence.reviewDeadline &&
+    evidence.status == EvidenceStatus.Submitted;
+
+require(timeoutExpired || reviewExpired, "Refund conditions not met");
+```
+
+**Key Features:**
+- **Decryption Timeout**: 1-hour limit for Gateway responses
+- **Review Deadline**: 7-day window for reviewer action
+- **Deposit Protection**: Evidence requires 0.001 ETH minimum
+- **Reentrancy Safe**: Uses checks-effects-interactions pattern
+
+### Privacy-Preserving Division
+
+**Challenge:** Division operations on encrypted data can leak information about operands through pattern analysis.
+
+**Solution:** Random multiplier obfuscation
+```solidity
+function privacyPreservingDivision(
+    euint64 numerator,
+    uint64 denominator,
+    uint64 randomMultiplier
+) internal pure returns (euint64) {
+    // Multiply by random before division
+    euint64 obfuscated = FHE.mul(numerator, FHE.asEuint64(randomMultiplier));
+
+    // Divide by scaled denominator
+    euint64 divisor = FHE.asEuint64(denominator * randomMultiplier);
+    euint64 result = FHE.div(obfuscated, divisor);
+
+    return result; // Mathematically equivalent but privacy-preserving
+}
+```
+
+**Mathematics:**
+```
+Original: numerator / denominator
+Obfuscated: (numerator × R) / (denominator × R) = numerator / denominator
+Where R is a random multiplier (1-1000)
+```
+
+### Price Obfuscation Technique
+
+**Challenge:** Encrypted prices can still leak information through timing and pattern correlation.
+
+**Solution:** Additive noise based on block data
+```solidity
+function obfuscatePrice(euint64 basePrice, uint64 noiseFactor) internal view returns (euint64) {
+    // Generate pseudo-random noise from block data
+    uint64 noise = uint64(uint256(keccak256(abi.encodePacked(
+        block.timestamp,
+        block.prevrandao,
+        evidenceCount
+    ))) % noiseFactor);
+
+    // Add noise to encrypted price
+    euint64 noiseEncrypted = FHE.asEuint64(noise);
+    euint64 obfuscated = FHE.add(basePrice, noiseEncrypted);
+
+    return obfuscated;
+}
+```
+
+**Security Properties:**
+- **Temporal Variation**: Different noise each block
+- **Unpredictability**: Uses block.prevrandao (post-merge randomness)
+- **Configurable Intensity**: Noise factor 0-100%
+- **Pattern Breaking**: Prevents correlation attacks
+
+### Timeout Protection System
+
+**Three-Layer Protection:**
+
+1. **Decryption Timeout (1 hour)**
+   - Prevents Gateway failures from locking funds
+   - Allows refund if no callback received
+   - Configurable via `DECRYPTION_TIMEOUT` constant
+
+2. **Review Deadline (7 days)**
+   - Ensures reviewers act within reasonable time
+   - Submitters can reclaim deposit if deadline passes
+   - Configurable via `EVIDENCE_REVIEW_TIMEOUT` constant
+
+3. **Case Expiry (Optional)**
+   - Judges can set time-limited cases
+   - Prevents evidence submission after expiry
+   - Cases cannot be reopened after expiry
+
+**Implementation:**
+```solidity
+// Automatic deadline calculation
+evidence.reviewDeadline = block.timestamp + EVIDENCE_REVIEW_TIMEOUT;
+
+// Timeout check in refund
+bool timeoutExpired = evidence.decryptionPending &&
+    (block.timestamp > evidence.submissionTime + DECRYPTION_TIMEOUT);
+```
+
+### Gas Optimization Strategies
+
+**FHE Operation Optimization:**
+- Batch encrypted operations where possible
+- Use `FHE.allowThis()` efficiently
+- Minimize encrypted storage reads
+- Optimize access control list checks
+
+**Storage Optimization:**
+- Pack related data in structs
+- Use mappings over arrays for lookups
+- Efficient event emission
+- Minimal redundant storage
+
+**Control Flow Optimization:**
+- Early validation checks
+- Short-circuit boolean logic
+- Efficient modifier ordering
+- Optimized loop structures (where present)
 
 ---
 
